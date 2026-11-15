@@ -1,0 +1,212 @@
+<mxfile host="app.diagrams.net" modified="2026-11-15T12:00:00.000Z" agent="Antigravity" version="24.0.0">
+  <diagram id="MultiAgentCooperation" name="Multi-Agent System Cooperation &amp; Architecture">
+    <mxGraphModel dx="1420" dy="1150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== TITLE BANNER ==================== -->
+        <mxCell id="title" value="&lt;b&gt;MULTI-AGENT SYSTEMS: COLLABORATION ARCHITECTURE &amp;amp; WORKFLOW LIFECYCLE (SECTION 13)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal; color: #555555;&quot;&gt;How Specialized Agents (Planner, Developer, Tester, Reviewer, Security, Docs) Delegate, Communicate, Parallelize, Merge, and Resolve Conflicts&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#d0d7de;strokeWidth=1;fontSize=18;fontColor=#24292f;align=center;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== PIPELINE 1: RUNTIME COLLABORATION LIFECYCLE ==================== -->
+        <mxCell id="sec1_container" value="&lt;b&gt;PIPELINE 1: THE MULTI-AGENT COLLABORATION &amp;amp; EXECUTION PIPELINE&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;strokeWidth=2;fontSize=13;fontColor=#4c1d95;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="1320" height="515" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 1: Intake & Shared Context (y=40 to 105) -->
+        <mxCell id="step1_req" value="&lt;b&gt;Customer Request&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Business Intent&lt;br/&gt;• Scope &amp;amp; SLAs&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=1.5;fontSize=11;fontColor=#4c1d95;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="40" width="150" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step2_planner" value="&lt;b&gt;1. Planner Agent (Coordinator)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Decomposes Requirements&lt;br/&gt;• Dependency Mapping &amp;amp; Roadmap&lt;br/&gt;• &lt;i style=&quot;color:#7c3aed;&quot;&gt;Zero Direct Code Writes&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;fontColor=#4c1d95;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="210" y="40" width="210" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="shared_context_box" value="&lt;b&gt;SHARED CONTEXT &amp;amp; ASYNCHRONOUS EVENT BUS (Single Source of Truth)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Central Knowledge Base: Project Goals &amp;amp; Constraints | Real-Time Task States | Shared Memory &amp;amp; Event Queues&lt;br/&gt;• &lt;b style=&quot;color:#5b21b6;&quot;&gt;Context Minimization:&lt;/b&gt; Each agent receives only its targeted task slice to prevent token saturation&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede9fe;strokeColor=#8b5cf6;strokeWidth=1.5;strokeDashArray=3 3;fontSize=11;fontColor=#5b21b6;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="455" y="40" width="835" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 2: Parallel Specialist Execution (y=135 to 205) -->
+        <mxCell id="agent_dev" value="&lt;b&gt;2A. Developer Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;&lt;b style=&quot;color:#1e40af;&quot;&gt;Implementation Specialist&lt;/b&gt;&lt;br/&gt;• Feature Gen &amp;amp; Refactoring&lt;br/&gt;• Express / API Route Logic&lt;br/&gt;• Scoped Code Mutations&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2563eb;strokeWidth=1.5;fontSize=11;fontColor=#1e40af;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="135" width="300" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="agent_research" value="&lt;b&gt;2B. Research Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;&lt;b style=&quot;color:#0369a1;&quot;&gt;Information Specialist&lt;/b&gt;&lt;br/&gt;• Tech Stack Feasibility&lt;br/&gt;• 3rd-Party API Specs &amp;amp; SDKs&lt;br/&gt;• Best-Practice Retrieval&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;strokeWidth=1.5;fontSize=11;fontColor=#0369a1;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="345" y="135" width="300" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="agent_db" value="&lt;b&gt;2C. Database Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;&lt;b style=&quot;color:#0f766e;&quot;&gt;Data Specialist&lt;/b&gt;&lt;br/&gt;• Migration &amp;amp; Schema Design&lt;br/&gt;• Query &amp;amp; Index Optimization&lt;br/&gt;• Test Seed Fixtures&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0d9488;strokeWidth=1.5;fontSize=11;fontColor=#0f766e;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="665" y="135" width="300" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="agent_sec_parallel" value="&lt;b&gt;2D. Security Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;&lt;b style=&quot;color:#991b1b;&quot;&gt;Compliance Specialist&lt;/b&gt;&lt;br/&gt;• Secret Detection in Diffs&lt;br/&gt;• Dependency CVE Scanning&lt;br/&gt;• Least-Privilege IAM Checks&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;strokeWidth=1.5;fontSize=11;fontColor=#991b1b;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="985" y="135" width="305" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 3: Workflow Merging & Integration Engine (y=235 to 295) -->
+        <mxCell id="step4_merge" value="&lt;b&gt;3. Workflow Merging &amp;amp; Integration Engine&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #713f12;&quot;&gt;• &lt;b&gt;Combine Code:&lt;/b&gt; Integrates developer code, schema patches &amp;amp; configuration into one cohesive delivery branch&lt;br/&gt;• &lt;b&gt;Aggregate Reports:&lt;/b&gt; Consolidates research findings, performance metrics &amp;amp; dependency manifests into shared memory&lt;br/&gt;• &lt;b&gt;Consistency Verification:&lt;/b&gt; Programmatically detects duplicate logic, incompatible signatures, and broken dependencies&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fefce8;strokeColor=#ca8a04;strokeWidth=1.5;fontSize=11;fontColor=#854d0e;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="235" width="1265" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 4: Structured Conflict Resolution Engine (y=325 to 385) -->
+        <mxCell id="step5_conflict" value="&lt;b&gt;4. Structured Conflict Resolution Engine&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #881337;&quot;&gt;Resolves inevitable multi-agent disagreements (e.g. Feature Speed vs Security, Pattern A vs Pattern B):&lt;br/&gt;• &lt;b&gt;Confidence Scoring:&lt;/b&gt; Weights recommendations by agent domain expertise | • &lt;b&gt;Rule Policies:&lt;/b&gt; Applies organizational standards automatically&lt;br/&gt;• &lt;b&gt;Consensus Voting:&lt;/b&gt; Peer quorum evaluation | • &lt;b&gt;Human Escalation Gate:&lt;/b&gt; Architectural intervention for high-risk ambiguities&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1f2;strokeColor=#e11d48;strokeWidth=1.5;fontSize=11;fontColor=#9f1239;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="325" width="1265" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 5: Quality & Release Pipeline (y=415 to 485) -->
+        <mxCell id="gate_tester" value="&lt;b&gt;5A. Tester Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Unit &amp;amp; Integration Tests&lt;br/&gt;• API &amp;amp; End-to-End Suites&lt;br/&gt;• 100% Pass Required&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=1.5;fontSize=11;fontColor=#15803d;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="415" width="235" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gate_reviewer" value="&lt;b&gt;5B. Reviewer Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Architecture &amp;amp; Cleanliness&lt;br/&gt;• Performance Bottlenecks&lt;br/&gt;• Severity Triage (P0-P3)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2563eb;strokeWidth=1.5;fontSize=11;fontColor=#1d4ed8;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="285" y="415" width="235" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gate_docs" value="&lt;b&gt;5C. Documentation Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Auto-Generated API Specs&lt;br/&gt;• README &amp;amp; Arch Updates&lt;br/&gt;• Changelog Synchronization&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d97706;strokeWidth=1.5;fontSize=11;fontColor=#b45309;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="545" y="415" width="235" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gate_sec_final" value="&lt;b&gt;5D. Final Security Gate&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #555;&quot;&gt;• Pre-Deployment Audit&lt;br/&gt;• Permission Blast-Radius&lt;br/&gt;• Compliance Sign-Off&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc2626;strokeWidth=1.5;fontSize=11;fontColor=#991b1b;arcSize=8;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="805" y="415" width="235" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step7_release" value="&lt;b&gt;6. Verified Release&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 10px; color: #166534;&quot;&gt;• All Quality Gates Green&lt;br/&gt;• Clean Commit &amp;amp; Tag&lt;br/&gt;• Production Deployment&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;strokeWidth=2;fontSize=11;fontColor=#15803d;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="1065" y="415" width="225" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors Tier 1 -->
+        <mxCell id="c_t1_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7c3aed;strokeWidth=2;" edge="1" parent="sec1_container" source="step1_req" target="step2_planner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_t1_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7c3aed;strokeWidth=2;" edge="1" parent="sec1_container" source="step2_planner" target="shared_context_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Downward Dispatch from Context Bus to Parallel Agents (Zero Overlap) -->
+        <mxCell id="c_t2_dev" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=1.5;" edge="1" parent="sec1_container" source="shared_context_box" target="agent_dev">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="120" />
+              <mxPoint x="175" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_t2_res" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=1.5;" edge="1" parent="sec1_container" source="shared_context_box" target="agent_research">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="495" y="120" />
+              <mxPoint x="495" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_t2_db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=1.5;" edge="1" parent="sec1_container" source="shared_context_box" target="agent_db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="815" y="120" />
+              <mxPoint x="815" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_t2_sec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8b5cf6;strokeWidth=1.5;" edge="1" parent="sec1_container" source="shared_context_box" target="agent_sec_parallel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1135" y="120" />
+              <mxPoint x="1135" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Downward Connectors from Parallel Agents to Merge Engine (Straight Down, Zero Overlap) -->
+        <mxCell id="c_m_dev" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563eb;strokeWidth=1.5;" edge="1" parent="sec1_container" source="agent_dev" target="step4_merge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_m_res" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284c7;strokeWidth=1.5;" edge="1" parent="sec1_container" source="agent_research" target="step4_merge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_m_db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0d9488;strokeWidth=1.5;" edge="1" parent="sec1_container" source="agent_db" target="step4_merge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_m_sec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#dc2626;strokeWidth=1.5;" edge="1" parent="sec1_container" source="agent_sec_parallel" target="step4_merge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Merge Engine to Conflict Engine -->
+        <mxCell id="c_merge_to_conflict" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ca8a04;strokeWidth=2;" edge="1" parent="sec1_container" source="step4_merge" target="step5_conflict">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Conflict Engine to Quality Pipeline -->
+        <mxCell id="c_conflict_to_tester" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16a34a;strokeWidth=2;" edge="1" parent="sec1_container" source="step5_conflict" target="gate_tester">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="142" y="400" />
+              <mxPoint x="142" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Collinear Quality Gates Connectors -->
+        <mxCell id="c_q_test_to_rev" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563eb;strokeWidth=2;" edge="1" parent="sec1_container" source="gate_tester" target="gate_reviewer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_q_rev_to_doc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d97706;strokeWidth=2;" edge="1" parent="sec1_container" source="gate_reviewer" target="gate_docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_q_doc_to_sec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#dc2626;strokeWidth=2;" edge="1" parent="sec1_container" source="gate_docs" target="gate_sec_final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_q_sec_to_rel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16a34a;strokeWidth=2;" edge="1" parent="sec1_container" source="gate_sec_final" target="step7_release">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Non-Overlapping Outer Feedback Loop: Tester -> Developer via Left Gutter -->
+        <mxCell id="c_feedback" value="Defect Feedback Loop (Self-Healing)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#dc2626;strokeWidth=1.5;strokeDashArray=3 3;fontColor=#b91c1c;fontSize=10;" edge="1" parent="sec1_container" source="gate_tester" target="agent_dev">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="10" y="450" />
+              <mxPoint x="10" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== PIPELINE 2: MULTI-AGENT HARNESS PRINCIPLES MATRIX ==================== -->
+        <mxCell id="sec2_container" value="&lt;b&gt;PIPELINE 2: MULTI-AGENT HARNESS ENGINEERING ALIGNMENT MATRIX (Core Collaboration Pillars)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=2;fontSize=13;fontColor=#0f172a;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="625" width="1320" height="485" as="geometry" />
+        </mxCell>
+
+        <!-- Card 1: Role Specialization & Single Responsibility -->
+        <mxCell id="p_card1" value="&lt;b style=&quot;font-size: 13px; color: #7c3aed;&quot;&gt;1. Role Specialization &amp;amp; Single Responsibility&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Single general-purpose models suffer high cognitive load, hallucinations, and conflate architectural planning with implementation.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #5b21b6;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• One clear responsibility per agent (Planner, Dev, Tester, Reviewer, Security, Docs)&lt;br/&gt;• Specialists consistently outperform generalists at lower token cost&lt;br/&gt;• High system extensibility: new roles (e.g. Compliance Agent) plug in with zero architectural rewrite&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ddd6fe;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 2: Shared Context & Least Knowledge Principle -->
+        <mxCell id="p_card2" value="&lt;b style=&quot;font-size: 13px; color: #2563eb;&quot;&gt;2. Shared Context vs. Context Minimization&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Isolated agents develop divergent assumptions, while broadcasting full repository history causes context window saturation.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #1e40af;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• &lt;b&gt;Single Source of Truth:&lt;/b&gt; Central repository for goals, task states, and shared memory&lt;br/&gt;• &lt;b&gt;Need-to-Know Scoping:&lt;/b&gt; Each agent receives only the targeted context slice necessary for its specific assignment&lt;br/&gt;• Eliminates duplicated effort while maintaining total architectural alignment&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#bfdbfe;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="45" width="410" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 3: Asynchronous Structured Communication -->
+        <mxCell id="p_card3" value="&lt;b style=&quot;font-size: 13px; color: #059669;&quot;&gt;3. Structured Messages &amp;amp; Event Bus&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Unstructured natural language dialogue between agents is ambiguous, fragile, and difficult to parse or validate programmatically.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #065f46;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• Predefined schema-based message formats (JSON/Pydantic contracts)&lt;br/&gt;• Milestone event triggers (e.g. Dev completion automatically fires Tester Agent)&lt;br/&gt;• Decoupled asynchronous message queues allow agents to work at optimal independent speeds&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a7f3d0;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 4: Aggressive Parallelization & Merging -->
+        <mxCell id="p_card4" value="&lt;b style=&quot;font-size: 13px; color: #d97706;&quot;&gt;4. Aggressive Parallelization &amp;amp; Merging&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Sequential task execution creates severe bottlenecks, underutilizes compute, and extends enterprise cycle time.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #92400e;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• Planner concurrently fans out independent work (Code, DB schemas, Research, Security)&lt;br/&gt;• &lt;b&gt;Merge &amp;amp; Integration Engine:&lt;/b&gt; Recombines branch outputs into unified delivery packages&lt;br/&gt;• &lt;b&gt;Consistency Verification:&lt;/b&gt; Catches duplicate logic and interface mismatches at machine speed&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#fde68a;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="260" width="405" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- Card 5: Structured Conflict Resolution -->
+        <mxCell id="p_card5" value="&lt;b style=&quot;font-size: 13px; color: #dc2626;&quot;&gt;5. Multi-Strategy Conflict Resolution&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Autonomous agents inevitably propose conflicting approaches (e.g. Security Agent demands friction vs Dev Agent optimizes speed).&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #991b1b;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• &lt;b&gt;Confidence Scoring:&lt;/b&gt; Weights recommendations by agent historical accuracy &amp;amp; domain&lt;br/&gt;• &lt;b&gt;Rule Policies:&lt;/b&gt; Hardcoded organizational guidelines automatically decide common disputes&lt;br/&gt;• &lt;b&gt;Consensus Voting &amp;amp; Human Gates:&lt;/b&gt; Peer quorum or escalation to human architects&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#fecaca;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="260" width="410" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- Card 6: Continuous Stage Gates & Observability -->
+        <mxCell id="p_card6" value="&lt;b style=&quot;font-size: 13px; color: #0284c7;&quot;&gt;6. Continuous Stage Gates &amp;amp; Telemetry&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;THE PROBLEM:&lt;/b&gt; Unvalidated agent handoffs propagate silent errors down the pipeline until critical production failures occur.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #075985;&quot;&gt;MULTI-AGENT HARNESS MECHANISM:&lt;/b&gt;&lt;br/&gt;• &lt;b&gt;Zero Blind Handoffs:&lt;/b&gt; Every stage must pass physical validation before reaching the next tier&lt;br/&gt;• &lt;b&gt;Full Audit Logging:&lt;/b&gt; Logs every prompt, tool call, decision rationale, and state transition&lt;br/&gt;• Living system telemetry enables continuous tuning of team topology and prompts&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#bae6fd;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="260" width="405" height="205" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

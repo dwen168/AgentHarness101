@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" modified="2026-11-15T12:00:00.000Z" agent="Antigravity" version="24.0.0">
+  <diagram id="CodexCLIHarness" name="Codex CLI Harness Architecture &amp; Workflow">
+    <mxGraphModel dx="1420" dy="980" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== TITLE BANNER ==================== -->
+        <mxCell id="title" value="&lt;b&gt;OPENAI CODEX CLI WORKFLOW: PRODUCTION HARNESS ARCHITECTURE (LAB 4)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal; color: #555555;&quot;&gt;How Codex CLI mechanisms (config.toml, Scoped AGENTS.md, Planning Gates, Defect Injection, Review Sessions) implement the Agent Harness Paradigm&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#d0d7de;strokeWidth=1;fontSize=18;fontColor=#24292f;align=center;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== SECTION 1: EXECUTION LIFECYCLE SWIMLANE ==================== -->
+        <mxCell id="sec1_container" value="&lt;b&gt;PIPELINE 1: THE RUNTIME EXECUTION LIFECYCLE (From Instruction Injection to Verified Commit)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;strokeWidth=2;fontSize=13;fontColor=#1a237e;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="1320" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Row 1: Left to Right (Steps 1 to 5) -->
+        <!-- Node 1: Config & Sandboxing -->
+        <mxCell id="n1_config" value="&lt;b&gt;1. Policy &amp;amp; Sandboxing&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;&lt;code&gt;.codex/config.toml&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;approval_policy: on-request&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;sandbox_mode: workspace-write&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;persistence: save-all&lt;/code&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3f51b5;strokeWidth=1.5;fontSize=12;fontColor=#1a237e;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="45" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 2: Scoped Context -->
+        <mxCell id="n2_context" value="&lt;b&gt;2. Hierarchical Instructions&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Root: &lt;code&gt;AGENTS.md&lt;/code&gt; (Standards, Git)&lt;br/&gt;• Scoped: &lt;code&gt;src/AGENTS.md&lt;/code&gt; (Architecture)&lt;br/&gt;• Scoped: &lt;code&gt;test/AGENTS.md&lt;/code&gt; (Jest isolation)&lt;br/&gt;• Context inheritance on startup&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3f51b5;strokeWidth=1.5;fontSize=12;fontColor=#1a237e;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="280" y="45" width="230" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 3: Planning Phase -->
+        <mxCell id="n3_plan" value="&lt;b&gt;3. Read-Only Planning&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;Prompt: &lt;i&gt;&#39;Plan without modifying files&#39;&lt;/i&gt;&lt;br/&gt;• Inspect current routes &amp;amp; service&lt;br/&gt;• Propose minimal blast radius&lt;br/&gt;• List affected files &amp;amp; required tests&lt;br/&gt;• &lt;b style=&quot;color:#c62828;&quot;&gt;Zero disk writes allowed&lt;/b&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#fbc02d;strokeWidth=1.5;fontSize=11;fontColor=#f57f17;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="545" y="45" width="230" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 4: Human Approval Gate -->
+        <mxCell id="n4_gate" value="&lt;b&gt;4. Human Approval Gate&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;&lt;b style=&quot;color:#c62828;&quot;&gt;CRITICAL CONTROL GATE:&lt;/b&gt;&lt;br/&gt;• Human audits proposed plan&lt;br/&gt;• Prune scope creep (No DB/TS)&lt;br/&gt;• &lt;code&gt;git switch -c feature/...&lt;/code&gt;&lt;br/&gt;• Explicit human authorization&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#e53935;strokeWidth=2;fontSize=11;fontColor=#b71c1c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="810" y="45" width="230" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 5: Implementation -->
+        <mxCell id="n5_exec" value="&lt;b&gt;5. Controlled Implementation&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Update &lt;code&gt;src/inventory-service.js&lt;/code&gt;&lt;br/&gt;• Add &lt;code&gt;PATCH /products/:id/quantity&lt;/code&gt;&lt;br/&gt;• Add 5 tests in &lt;code&gt;test/app.test.js&lt;/code&gt;&lt;br/&gt;• Zero unrequested files altered&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=1.5;fontSize=11;fontColor=#1b5e20;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="1075" y="45" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Row 2: Right to Left (Steps 6 to 9) -->
+        <!-- Node 6: Multi-Tier Verification -->
+        <mxCell id="n6_verify" value="&lt;b&gt;6. Automated Verification&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;Run quality gate:&lt;br/&gt;&lt;code&gt;npm run check&lt;/code&gt;&lt;br/&gt;• ESLint static analysis&lt;br/&gt;• Prettier format check&lt;br/&gt;• Jest test runner (100% pass)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3f51b5;strokeWidth=1.5;fontSize=11;fontColor=#1a237e;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="1075" y="195" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 7: Diff & Defect Injection -->
+        <mxCell id="n7_diff" value="&lt;b&gt;7. Diff &amp;amp; Defect Injection&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Line-by-line &lt;code&gt;git diff&lt;/code&gt; audit&lt;br/&gt;• Inject defect: weaken &lt;code&gt;quantity &amp;lt; 0&lt;/code&gt;&lt;br/&gt;• Stress-test tests and reviewer&lt;br/&gt;• Restore strict integer validation&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#fb8c00;strokeWidth=1.5;fontSize=11;fontColor=#e65100;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="810" y="195" width="230" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 8: Structured Review Mode -->
+        <mxCell id="n8_review" value="&lt;b&gt;8. Structured Review Agent&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Fresh Codex session (Clean slate)&lt;br/&gt;• Read-only review prompt&lt;br/&gt;• Severity triage: Critical, High, Med, Low&lt;br/&gt;• Verdict: &lt;b&gt;Ready to commit&lt;/b&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3f51b5;strokeWidth=1.5;fontSize=11;fontColor=#1a237e;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="460" y="195" width="270" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 9: Verified Commit Gate -->
+        <mxCell id="n9_commit" value="&lt;b&gt;9. Verified Git Commit Gate&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• &lt;code&gt;git add src/app.js src/inv... test/...&lt;/code&gt;&lt;br/&gt;• Meaningful commit message&lt;br/&gt;• Working tree clean, zero leakage&lt;br/&gt;• Push requires explicit authorization&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;fontColor=#1b5e20;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="110" y="195" width="270" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors Pipeline 1 -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3f51b5;strokeWidth=2;" edge="1" parent="sec1_container" source="n1_config" target="n2_context">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3f51b5;strokeWidth=2;" edge="1" parent="sec1_container" source="n2_context" target="n3_plan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#fbc02d;strokeWidth=2;" edge="1" parent="sec1_container" source="n3_plan" target="n4_gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e53935;strokeWidth=2;" edge="1" parent="sec1_container" source="n4_gate" target="n5_exec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2e7d32;strokeWidth=2;" edge="1" parent="sec1_container" source="n5_exec" target="n6_verify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3f51b5;strokeWidth=2;" edge="1" parent="sec1_container" source="n6_verify" target="n7_diff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#fb8c00;strokeWidth=2;" edge="1" parent="sec1_container" source="n7_diff" target="n8_review">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3f51b5;strokeWidth=2;" edge="1" parent="sec1_container" source="n8_review" target="n9_commit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Verification Feedback Loop -->
+        <mxCell id="e_loop" value="Verification Failure Feedback (Auto-Retry Loop)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#e53935;strokeWidth=1.5;strokeDashArray=3 3;fontColor=#c62828;fontSize=10;" edge="1" parent="sec1_container" source="n6_verify" target="n5_exec">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1310" y="240" />
+              <mxPoint x="1310" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== SECTION 2: HARNESS ALIGNMENT MATRIX ==================== -->
+        <mxCell id="sec2_container" value="&lt;b&gt;PIPELINE 2: HARNESS ALIGNMENT MATRIX (How Codex CLI Maps to Harness Principles)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#455a64;strokeWidth=2;fontSize=13;fontColor=#263238;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="1320" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- Card 1: Hierarchical Context -->
+        <mxCell id="c1" value="&lt;b style=&quot;font-size: 13px; color: #1565c0;&quot;&gt;1. Hierarchical Context Scoping&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Dynamic context scoping prevents token bloat and hallucinated rules.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #0d47a1;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Root &lt;code&gt;AGENTS.md&lt;/code&gt;: Project architecture, Git safety, coding standards&lt;br/&gt;• &lt;code&gt;src/AGENTS.md&lt;/code&gt;: Enforces &lt;code&gt;{ &quot;error&quot;: &quot;...&quot; }&lt;/code&gt; JSON schema &amp;amp; route bounds&lt;br/&gt;• &lt;code&gt;test/AGENTS.md&lt;/code&gt;: Mandates test independence &amp;amp; forbids weakened assertions&lt;br/&gt;• Automatic inheritance based on active working path&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#bbdefb;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 2: Policy Sandboxing -->
+        <mxCell id="c2" value="&lt;b style=&quot;font-size: 13px; color: #2e7d32;&quot;&gt;2. Policy-Based Sandboxing&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Least Privilege Execution. Bound file mutations strictly to the project sandbox.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #1b5e20;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• &lt;code&gt;.codex/config.toml&lt;/code&gt; declaration&lt;br/&gt;• &lt;code&gt;sandbox_mode = &quot;workspace-write&quot;&lt;/code&gt; locks writes to current repository&lt;br/&gt;• &lt;code&gt;approval_policy = &quot;on-request&quot;&lt;/code&gt; intercepts non-whitelisted commands&lt;br/&gt;• &lt;code&gt;[history] persistence = &quot;save-all&quot;&lt;/code&gt; guarantees immutable auditability&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c8e6c9;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="45" width="410" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 3: Decoupled Planning -->
+        <mxCell id="c3" value="&lt;b style=&quot;font-size: 13px; color: #f57f17;&quot;&gt;3. Decoupled Planning vs Execution&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Prohibit premature mutation. Separate architectural reasoning from disk writes.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #e65100;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Strict Planning Prompt: &lt;i&gt;&quot;Plan without modifying any files&quot;&lt;/i&gt;&lt;br/&gt;• Requires explicit identification of affected files, tests, and edge cases&lt;br/&gt;• Iterative Plan Revision prompts prune scope creep (No DB, No TS conversions)&lt;br/&gt;• Execution is blocked until human explicitly responds &lt;i&gt;&quot;Plan approved&quot;&lt;/i&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#fff59d;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 4: External Verification -->
+        <mxCell id="c4" value="&lt;b style=&quot;font-size: 13px; color: #4a148c;&quot;&gt;4. Objective Physical Verification&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Trust No Self-Report. External automated test runners provide ground truth.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #311b92;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• &lt;code&gt;npm run check&lt;/code&gt; pipeline: ESLint + Prettier + Jest&lt;br/&gt;• Tests assert status codes (200, 400, 404) &amp;amp; exact JSON payload bodies&lt;br/&gt;• Non-negotiable completion criterion codified in root &lt;code&gt;AGENTS.md&lt;/code&gt;&lt;br/&gt;• Diagnostic stack traces feed bounded self-healing retry cycles&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d1c4e9;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="265" width="405" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- Card 5: Adversarial Defect Injection -->
+        <mxCell id="c5" value="&lt;b style=&quot;font-size: 13px; color: #b71c1c;&quot;&gt;5. Adversarial Defect Injection&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Guardrail Falsification. Deliberately stress-test verifiers and reviewers.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #880e4f;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Intentionally weaken validation: change integer check to &lt;code&gt;quantity &amp;lt; 0&lt;/code&gt;&lt;br/&gt;• Verify whether tests fail or reviewer catches unhandled float/string values&lt;br/&gt;• Demands agent restore strict check: &lt;code&gt;!Number.isInteger(quantity)&lt;/code&gt;&lt;br/&gt;• Validates that harness catches subtle, non-syntax semantic defects&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffcdd2;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="265" width="410" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- Card 6: Role-Separated Review Audit -->
+        <mxCell id="c6" value="&lt;b style=&quot;font-size: 13px; color: #004d40;&quot;&gt;6. Role-Separated Review Mode&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Segregation of Duties. Eliminate builder cognitive bias via clean-slate review.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #00695c;&quot;&gt;CODEX CLI NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Independent session started with explicit &lt;i&gt;&quot;Review uncommitted changes&quot;&lt;/i&gt;&lt;br/&gt;• Enforces Read-Only constraint (&lt;i&gt;&quot;Do not edit files&quot;&lt;/i&gt;)&lt;br/&gt;• 10-point inspection: validation, HTTP codes, architecture, security, scope&lt;br/&gt;• Structured severity outputs (Critical, High, Medium, Low) &amp;amp; commit readiness&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b2dfdb;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="265" width="405" height="205" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

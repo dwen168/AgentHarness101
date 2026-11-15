@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" modified="2026-11-15T11:22:00.000Z" agent="Antigravity" version="24.0.0">
+  <diagram id="ClaudeCodeHarness" name="Claude Code Harness Architecture &amp; Workflow">
+    <mxGraphModel dx="1420" dy="980" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== TITLE BANNER ==================== -->
+        <mxCell id="title" value="&lt;b&gt;CLAUDE CODE WORKFLOW: HARNESS ENGINEERING ARCHITECTURE (LAB 3)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal; color: #555555;&quot;&gt;How Claude Code native mechanisms (Instructions, Memory, Permissions, Hooks &amp;amp; Skills) implement the Agent Harness Paradigm&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#d0d7de;strokeWidth=1;fontSize=18;fontColor=#24292f;align=center;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1320" height="55" as="geometry" />
+        </mxCell>
+
+
+        <!-- ==================== SECTION 1: EXECUTION LIFECYCLE SWIMLANE ==================== -->
+        <mxCell id="sec1_container" value="&lt;b&gt;PIPELINE 1: THE RUNTIME EXECUTION LIFECYCLE (From Prompt to Verified Commit)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;strokeWidth=2;fontSize=13;fontColor=#4a148c;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="1320" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Node 1: Input -->
+        <mxCell id="n1_input" value="&lt;b&gt;1. Trigger / Invocation&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Direct Prompt&lt;br/&gt;• Reusable Skill:&lt;br/&gt;&lt;code style=&quot;color:#7b1fa2;&quot;&gt;/add-endpoint&lt;/code&gt;&lt;br/&gt;&lt;code style=&quot;color:#7b1fa2;&quot;&gt;/check-project&lt;/code&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7b1fa2;strokeWidth=1.5;fontSize=12;fontColor=#4a148c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="25" y="45" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 2: Context Resolution -->
+        <mxCell id="n2_context" value="&lt;b&gt;2. Hierarchical Context&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Root: &lt;code&gt;CLAUDE.md&lt;/code&gt;&lt;br/&gt;• Scoped: &lt;code&gt;src/CLAUDE.md&lt;/code&gt;&lt;br/&gt;• Scoped: &lt;code&gt;test/CLAUDE.md&lt;/code&gt;&lt;br/&gt;• Session Memory (&lt;code&gt;/memory&lt;/code&gt;)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7b1fa2;strokeWidth=1.5;fontSize=12;fontColor=#4a148c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="215" y="45" width="185" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 3: Planning & Permissions -->
+        <mxCell id="n3_plan" value="&lt;b&gt;3. Planning &amp;amp; Policy Gate&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Generate plan without edit&lt;br/&gt;• &lt;code&gt;.claude/settings.json&lt;/code&gt;&lt;br/&gt;• Check &lt;b&gt;allow&lt;/b&gt; / &lt;b&gt;deny&lt;/b&gt; rules&lt;br/&gt;• Interactive approval prompt&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7b1fa2;strokeWidth=1.5;fontSize=12;fontColor=#4a148c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="430" y="45" width="185" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 4: PreToolUse Hook -->
+        <mxCell id="n4_prehook" value="&lt;b&gt;4. PreToolUse Safety Hook&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;&lt;code&gt;block-dangerous-command.js&lt;/code&gt;&lt;br/&gt;Regex intercepts stdin JSON:&lt;br/&gt;• &lt;code&gt;rm -rf&lt;/code&gt;, &lt;code&gt;git reset --hard&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;git push --force&lt;/code&gt;, &lt;code&gt;reboot&lt;/code&gt;&lt;br/&gt;&lt;b style=&quot;color:#c62828;&quot;&gt;Exit 2 &amp;rarr; Intercept &amp;amp; Kill&lt;/b&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;strokeWidth=1.5;fontSize=11;fontColor=#e65100;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="645" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Node 5: Tool Execution -->
+        <mxCell id="n5_exec" value="&lt;b&gt;5. Tool Execution&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• Edit &lt;code&gt;src/app.js&lt;/code&gt;&lt;br/&gt;• Edit &lt;code&gt;src/task-service.js&lt;/code&gt;&lt;br/&gt;• Write &lt;code&gt;test/app.test.js&lt;/code&gt;&lt;br/&gt;• Execute approved Bash CLI&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=1.5;fontSize=12;fontColor=#1b5e20;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="875" y="45" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Node 6: PostToolUse Hook -->
+        <mxCell id="n6_posthook" value="&lt;b&gt;6. PostToolUse Hook&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;&lt;code&gt;format-after-edit.js&lt;/code&gt;&lt;br/&gt;Auto-triggers on &lt;b&gt;Edit|Write&lt;/b&gt;:&lt;br/&gt;• Spawns &lt;code&gt;npx prettier --write&lt;/code&gt;&lt;br/&gt;• Guaranteed formatting invariant&lt;br/&gt;• Zero reliance on model memory&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;strokeWidth=1.5;fontSize=11;fontColor=#01579b;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="1085" y="40" width="205" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Lower Row: Verification & Commit -->
+        <mxCell id="n7_verify" value="&lt;b&gt;7. Objective Verification&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;Runs required quality suite:&lt;br/&gt;&lt;code&gt;npm run check&lt;/code&gt;&lt;br/&gt;(= eslint + prettier:check + jest)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7b1fa2;strokeWidth=1.5;fontSize=12;fontColor=#4a148c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="875" y="190" width="180" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n8_review" value="&lt;b&gt;8. Diff Review &amp;amp; Audit&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;&lt;code&gt;/review-changes&lt;/code&gt;&lt;br/&gt;• Inspect &lt;code&gt;git diff&lt;/code&gt;&lt;br/&gt;• Read-only audit check&lt;br/&gt;• Severity categorization&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7b1fa2;strokeWidth=1.5;fontSize=12;fontColor=#4a148c;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="580" y="190" width="190" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n9_commit" value="&lt;b&gt;9. Clean Verified Commit&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size: 11px; color: #555;&quot;&gt;• &lt;code&gt;git add .&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;git commit -m &quot;...&quot;&lt;/code&gt;&lt;br/&gt;• Prohibit unapproved push&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=2;fontSize=12;fontColor=#1b5e20;arcSize=10;align=center;" vertex="1" parent="sec1_container">
+          <mxGeometry x="280" y="195" width="180" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Pipeline Connectors -->
+        <mxCell id="p1" edge="1" source="n1_input" target="n2_context" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p2" edge="1" source="n2_context" target="n3_plan" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p3" edge="1" source="n3_plan" target="n4_prehook" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p4" value="Permitted" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2e7d32;strokeWidth=1.5;fontColor=#2e7d32;fontSize=10;" edge="1" source="n4_prehook" target="n5_exec" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p5" edge="1" source="n5_exec" target="n6_posthook" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7b1fa2;strokeWidth=1.5;" edge="1" source="n6_posthook" target="n7_verify" parent="sec1_container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1187" y="165" /><mxPoint x="965" y="165" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7" value="Pass" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2e7d32;strokeWidth=1.5;fontColor=#2e7d32;fontSize=10;" edge="1" source="n7_verify" target="n8_review" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="p8" value="Approved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2e7d32;strokeWidth=1.5;fontColor=#2e7d32;fontSize=10;" edge="1" source="n8_review" target="n9_commit" parent="sec1_container"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+
+        <!-- ==================== SECTION 2: HARNESS ENGINEERING ALIGNMENT ==================== -->
+        <mxCell id="sec2_container" value="&lt;b&gt;PIPELINE 2: HARNESS ENGINEERING ALIGNMENT MATRIX (Theory &amp;amp; Lab 3 Features)&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#455a64;strokeWidth=2;fontSize=13;fontColor=#263238;arcSize=6;startSize=28;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="1320" height="505" as="geometry" />
+        </mxCell>
+
+        <!-- Card 1: Context & Scoping -->
+        <mxCell id="c1" value="&lt;b style=&quot;font-size: 13px; color: #0288d1;&quot;&gt;1. Context &amp;amp; Rule Scoping&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Invariant rules must persist across sessions without repeated manual prompting.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #01579b;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Root &lt;code&gt;CLAUDE.md&lt;/code&gt; (Architecture, CommonJS, npm check)&lt;br/&gt;• Hierarchical Scoped Rules:&lt;br/&gt;  - &lt;code&gt;src/CLAUDE.md&lt;/code&gt; (HTTP routes &amp;amp; JSON error format)&lt;br/&gt;  - &lt;code&gt;test/CLAUDE.md&lt;/code&gt; (Jest/Supertest testing rules)&lt;br/&gt;• Cross-session persistent Memory (&lt;code&gt;/memory&lt;/code&gt;)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b3e5fc;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 2: Security & Permissions -->
+        <mxCell id="c2" value="&lt;b style=&quot;font-size: 13px; color: #e65100;&quot;&gt;2. Permission Sandboxing&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Enforce the Principle of Least Privilege; restrict blast radius on git/filesystem.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #bf360c;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• &lt;code&gt;.claude/settings.json&lt;/code&gt;&lt;br/&gt;• &lt;b&gt;Allowlist:&lt;/b&gt; Safe commands (&lt;code&gt;npm test&lt;/code&gt;, &lt;code&gt;git diff*&lt;/code&gt;)&lt;br/&gt;• &lt;b&gt;Denylist:&lt;/b&gt; Destructive actions (&lt;code&gt;git push*&lt;/code&gt;, &lt;code&gt;git reset --hard*&lt;/code&gt;, &lt;code&gt;git clean*&lt;/code&gt;)&lt;br/&gt;• Working Directory boundary protection&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffe0b2;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="45" width="410" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 3: Deterministic Pre-Execution Gates -->
+        <mxCell id="c3" value="&lt;b style=&quot;font-size: 13px; color: #c2185b;&quot;&gt;3. Pre-Execution Safety Hook&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Intercept dangerous actions deterministically at the system level before they hit shell.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #880e4f;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• &lt;code&gt;PreToolUse&lt;/code&gt; Hook on Bash commands&lt;br/&gt;• &lt;code&gt;block-dangerous-command.js&lt;/code&gt;&lt;br/&gt;• Reads &lt;code&gt;stdin&lt;/code&gt; JSON event structure&lt;br/&gt;• Blocks &lt;code&gt;rm -rf&lt;/code&gt;, &lt;code&gt;npm publish&lt;/code&gt;, &lt;code&gt;shutdown&lt;/code&gt;&lt;br/&gt;• Non-zero exit code halts execution instantly&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#f8bbd0;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="45" width="405" height="195" as="geometry" />
+        </mxCell>
+
+        <!-- Card 4: Post-Mutation Invariants -->
+        <mxCell id="c4" value="&lt;b style=&quot;font-size: 13px; color: #2e7d32;&quot;&gt;4. Post-Mutation Invariants&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Enforce code hygiene automatically without relying on LLM memory.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #1b5e20;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• &lt;code&gt;PostToolUse&lt;/code&gt; Hook on &lt;code&gt;Edit|Write&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;format-after-edit.js&lt;/code&gt;&lt;br/&gt;• Automatically triggers &lt;code&gt;prettier --write&lt;/code&gt;&lt;br/&gt;• Zero lint regressions due to indentation/semicolons&lt;br/&gt;• Instant terminal telemetry: &quot;Formatted src/app.js&quot;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c8e6c9;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="25" y="260" width="405" height="215" as="geometry" />
+        </mxCell>
+
+        <!-- Card 5: Reusable Modular Skills -->
+        <mxCell id="c5" value="&lt;b style=&quot;font-size: 13px; color: #6a1b9a;&quot;&gt;5. Standard Operating Procedures (Skills)&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Package complex, repeatable engineering workflows into version-controlled SOPs.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #4a148c;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Reusable Skills under &lt;code&gt;.claude/skills/*/SKILL.md&lt;/code&gt;&lt;br/&gt;• &lt;code&gt;/add-endpoint&lt;/code&gt;: 12-step strict routing/validation/test pipeline&lt;br/&gt;• &lt;code&gt;/check-project&lt;/code&gt;: One-click full CI quality health check&lt;br/&gt;• &lt;code&gt;/review-changes&lt;/code&gt;: Multi-severity read-only diff audit&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e1bee7;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="455" y="260" width="410" height="215" as="geometry" />
+        </mxCell>
+
+        <!-- Card 6: Multi-Tier Objective Verification -->
+        <mxCell id="c6" value="&lt;b style=&quot;font-size: 13px; color: #37474f;&quot;&gt;6. Multi-Tier Verification &amp;amp; Review&lt;/b&gt;&lt;br/&gt;&lt;div style=&quot;text-align: left; font-size: 11px; margin-top: 6px; line-height: 1.4;&quot;&gt;&lt;b style=&quot;color: #555;&quot;&gt;HARNESS PRINCIPLE:&lt;/b&gt; Never trust self-assessment; require objective test runners &amp;amp; diff inspection before commit.&lt;br/&gt;&lt;br/&gt;&lt;b style=&quot;color: #212121;&quot;&gt;CLAUDE CODE NATIVE FEATURE:&lt;/b&gt;&lt;br/&gt;• Multi-tier checks: ESLint + Prettier + Jest&lt;br/&gt;• &lt;code&gt;npm run check&lt;/code&gt; enforced as non-negotiable exit criterion&lt;br/&gt;• Mandatory &lt;code&gt;git diff&lt;/code&gt; blast-radius review&lt;br/&gt;• Rejection of unrequested dependencies or API leaks&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cfd8dc;strokeWidth=1.5;arcSize=8;align=left;spacing=10;verticalAlign=top;" vertex="1" parent="sec2_container">
+          <mxGeometry x="890" y="260" width="405" height="215" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
