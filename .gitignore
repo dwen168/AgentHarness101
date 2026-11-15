@@ -1,0 +1,26 @@
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+*.venv/
+
+# Logs (keep directory structure via .gitkeep)
+**/logs/*
+!**/logs/.gitkeep
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Testing & Coverage
+.coverage
+htmlcov/
+.tox/
+
+# OS specific files
+.DS_Store
+Thumbs.db
